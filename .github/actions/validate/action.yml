@@ -1,0 +1,13 @@
+name: Validate
+description: 'Lints and tests'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Lint
+      shell: bash
+      run: yarn lint
+
+    - name: Test
+      shell: bash
+      run: yarn test

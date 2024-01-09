@@ -1,0 +1,43 @@
+name: Dev Build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  dev-build:
+    runs-on: ubuntu-latest
+    container: reactnativecommunity/react-native-android:latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          requires_fastlane: true
+
+      # - name: Validate
+      #   uses: ./.github/actions/validate
+
+      # - name: Bump Build Version
+      #   uses: ./.github/workflows/bump-version.yml
+      #   with:
+      #     bump_type: invisible
+
+      # - name: Firebase Deploy Dev
+      #   uses: ./.github/actions/firebase-deploy
+      #   with:
+      #     environment: dev
+
+  # bump-build-version:
+  #   needs: validate
+  #   uses: ./.github/workflows/bump-version.yml
+  #   with:
+  #     bump_type: invisible
+
+  # firebase-deploy-dev:
+  #   needs: bump-build-version
+  #   uses: ./.github/workflows/firebase-deploy.yml
+  #   with:
+  #     environment: dev

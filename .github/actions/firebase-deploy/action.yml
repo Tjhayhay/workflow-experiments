@@ -1,0 +1,20 @@
+name: Firebase Deploy Workflow
+description: Deploys Android build to Firebase
+  inputs:
+    environment:
+      description: 'Environment'
+      required: true
+      default: 'dev'
+      type: string
+runs:
+  using: 'composite'
+  steps:
+    - name: Write Firebase Secrets
+      shell: bash
+      run: |
+        echo -n "blah"
+
+    - name: Fastlane Distribute Firebase
+      shell: bash
+      run: |
+        bundle exec fastlane distribute_firebase environment:${{ inputs.environment }}

@@ -1,0 +1,31 @@
+name: 'Setup'
+description: 'Repo checkout and dependency installation'
+inputs:
+  requires_fastlane:
+    description: 'Requires Fastlane'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: yarn
+        cache-dependency-path: yarn.lock
+
+    - name: Install Yarn
+      shell: bash
+      run: npm install -g yarn
+
+    - name: Install Dependencies
+      shell: bash
+      run: yarn --frozen-lockfile
+
+    # - name: Setup Fastlane
+    #   shell: bash
+    #   if: ${{ inputs.requires_fastlane == true }}
+    #   run: |
+    #     cd android/
+    #     bundle config set --local path '../vendor/bundle'
+    #     bundle install
